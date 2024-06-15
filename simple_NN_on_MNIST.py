@@ -8,16 +8,46 @@ Created on Fri Jun 14 21:26:07 2024
 from tensorflow import keras
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.datasets import mnist
+import matplotlib.pyplot as plt
+import numpy as np
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+####Take a look at images #####
+def Get_Label(argument):
+    image_to_label = {
+        0: "Zero",
+        1: "One",
+        2: "Two",
+        3: "Three",
+        4: "Four",
+        5: "Five",
+        6: "Six",
+        7: "Seven",
+        8: "Eight",
+        9: "Nine",
+    }
+    return image_to_label.get(argument)
+fig = plt.figure(figsize=(12, 12))
+for i in range(9):
+ 
+    plt.subplot(3, 3, i + 1)
+
+    plt.imshow(train_images[i], cmap=plt.get_cmap('gray'))
+    plt.title(Get_Label(train_labels[i]))
+    
+plt.show()
+
+#######Data preprocessing############
+###PART I(arranging images)###
 train_images = train_images.reshape((60000, 28 * 28)).astype('float32') / 255
 test_images = test_images.reshape((10000, 28 * 28)).astype('float32') / 255
+###PART II(arranging labels)#########
 from tensorflow.keras.utils import to_categorical
 train_labels = to_categorical(train_labels)
 test_labels = to_categorical(test_labels)
 from tensorflow.keras.models import Sequential
 import tensorflow.keras.layers 
 from keras import layers
-###########
+###########Modeling#########
 class simple_NN(Sequential):
     def __init__(self,params):
         super().__init__()
@@ -54,13 +84,14 @@ x_train = train_images[:-10000]
 y_train = train_labels[:-10000]
 history=network.fit(x_train,y_train,callbacks=callbacks_list,validation_data=(x_val, y_val),epochs=10)
 test_loss, test_acc = network.evaluate(test_images, test_labels)
+####Model evaluation & diagnosis #####
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from mlxtend.plotting import plot_confusion_matrix
 predictions = network.predict(test_images)
 cm = confusion_matrix(test_labels.argmax(axis=1), predictions.argmax(axis=1))
 cm
 cm_plot_labels = range(1,11,1)
-import matplotlib.pyplot as plt
+
 fig, ax = plot_confusion_matrix(conf_mat=cm, class_names=cm_plot_labels, colorbar=True)
 plt.show()
 fig = plt.figure(figsize=(12, 12))
@@ -80,6 +111,6 @@ plt.plot(history.history['accuracy'], label='train')
 plt.plot(history.history['val_accuracy'], label='validation')
 plt.legend()
 plt.show()
-
+###########Model visualization######
 from tensorflow.keras.utils import plot_model
 plot_model(network, "simple_NN_on_MNIST.png", show_shapes=True)
