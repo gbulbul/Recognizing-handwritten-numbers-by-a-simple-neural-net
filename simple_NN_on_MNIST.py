@@ -32,7 +32,7 @@ for i in range(9):
     plt.subplot(3, 3, i + 1)
 
     plt.imshow(train_images[i], cmap=plt.get_cmap('gray'))
-    plt.title(Get_Label(train_labels[i]))
+    plt.title(f"Label: {Get_Label(train_labels[i])}")
     
 plt.show()
 
