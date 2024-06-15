@@ -38,8 +38,9 @@ plt.show()
 
 #######Data preprocessing############
 ###PART I(arranging images)###
-train_images = train_images.reshape((60000, 28 * 28)).astype('float32') / 255
-test_images = test_images.reshape((10000, 28 * 28)).astype('float32') / 255
+img_rows, img_cols=28, 28
+train_images = train_images.reshape((train_images.shape[0], img_rows * img_cols)).astype('float32') / 255
+test_images = test_images.reshape((test_images.shape[0], img_rows * img_cols)).astype('float32') / 255
 ###PART II(arranging labels)#########
 from tensorflow.keras.utils import to_categorical
 train_labels = to_categorical(train_labels)
@@ -59,7 +60,7 @@ class simple_NN(Sequential):
         metrics=params["metric"])
 
 
-params={"target_shape":(28 * 28,),
+params={"target_shape":(img_cols * img_rows,),
         "activation":'softmax',
         "optimizer":'rmsprop',
         "loss":'categorical_crossentropy',
