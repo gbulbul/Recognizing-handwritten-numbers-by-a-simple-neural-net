@@ -1,5 +1,6 @@
 
-![handwritten_images](https://github.com/gbulbul/simple-ANN-application-on-MNIST/assets/79763247/441a4c18-372a-4705-8b49-989ddd614378)
+![MNIST_images](https://github.com/gbulbul/Recognizing-handwritten-numbers-by-a-simple-neural-net-and-CNN/assets/79763247/89d40c40-8d3f-439a-b9e0-11ff0ba91c25)
+
 
 MNIST dataset is a benchmark dataset which was originally used to recognize handwritten numbers. MNIST has 10 classes, including grey scale (in this case) images of handwritten integers from 0 to 9. So, the task can be seen as a computer vision application when the aim is to detect images correctly as what the integer is on the given image. 
 
