@@ -25,10 +25,10 @@ Since CNNs are known for being successful at image detection, classification, a 
 
 This CNN model didn't outperform the simple NN model and its diagnostics (loss-accuracy plots & CM) are given as well.
 ![loss_on_MNIST_CNN](https://github.com/gbulbul/Recognizing-handwritten-numbers-by-a-simple-neural-net-and-CNN/assets/79763247/f0cc8edc-6fdb-4081-b674-71850f6195ba)
+Accuracy level (below 0.5) suggests that this CNN model is far from producing accurate results.
 
 ![cm_CNN_on_mnist](https://github.com/gbulbul/Recognizing-handwritten-numbers-by-a-simple-neural-net-and-CNN/assets/79763247/7b2bc33c-1614-49e4-85ce-437ad0aac05a)
 
-
-
+When we compare CM on CNN with CM on simple NN, the first one ended up with greater misclassification error which can be directly observed by the numbers we see on off-diagonal. 
 
 
