@@ -13,9 +13,6 @@ The model is depicted above, as we see it is simple as it could be with one dens
 
 From the figure showing the confusion matrix, we can make a conclusion that how the model did on classification task where there are 10 categories of numbers when the images of handwritten numbers were used to train the model.
 
-![simple_NN_on_MNIST](https://github.com/gbulbul/simple-ANN-application-on-MNIST/assets/79763247/614d0fbc-05ae-46b7-8450-d0cffc0fc7e6)
-
-The model is depicted above, as we see it is simple as it could be with one dense layer.
 
 ![simple_nn_accuracy_loss](https://github.com/gbulbul/simple-ANN-application-on-MNIST/assets/79763247/4acbab1e-abe8-4b96-8ae0-10621082746d)
 
