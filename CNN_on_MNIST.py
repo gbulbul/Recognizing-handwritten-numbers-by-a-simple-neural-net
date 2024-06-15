@@ -6,6 +6,10 @@ Created on Fri Jun 14 23:44:29 2024
 """
 
 from tensorflow import keras
+from tensorflow.keras.models import Sequential
+import tensorflow.keras.layers 
+from keras import layers
+import matplotlib.pyplot as plt
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.datasets import mnist
 ####Loading the dataset#####
@@ -16,12 +20,8 @@ test_images = test_images.reshape((10000, 28 * 28)).astype('float32') / 255
 from tensorflow.keras.utils import to_categorical
 train_labels = to_categorical(train_labels)
 test_labels = to_categorical(test_labels)
-from tensorflow.keras.models import Sequential
-import tensorflow.keras.layers 
-from keras import layers
-import matplotlib.pyplot as plt
 #############################################################################################
-####Adapting CNN format######(additional part, not found in simple NN modeling)##############
+####Adapting to CNN format######(additional part, not found in simple NN modeling)##############
 #############################################################################################
 import numpy as np
 xtrain=np.dstack([train_images] * 3)
@@ -37,18 +37,24 @@ xtest = np.asarray([img_to_array(array_to_img(im, scale=False).resize((48,48))) 
 class CNN(Sequential):
     def __init__(self,params):
         super().__init__()
-        self.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=params["target_shape"]))
+        self.add(layers.Conv2D(32, (3, 3), activation=params["activation_re"], input_shape=params["target_shape"]))
         self.add(layers.MaxPooling2D((2, 2)))
-        self.add(layers.Conv2D(64, (3, 3), activation='relu'))
+        self.add(layers.Conv2D(64, (3, 3), activation=params["activation_re"]))
         self.add(layers.MaxPooling2D((2, 2)))
-        self.add(layers.Conv2D(64, (3, 3), activation='relu'))
+        self.add(layers.Conv2D(64, (3, 3), activation=params["activation_re"]))
         self.add(layers.Flatten())
-        self.add(layers.Dense(64, activation='relu'))
-        self.add(layers.Dense(params["num_classes"], activation='softmax'))
+        self.add(layers.Dense(64, activation=params["activation_re"]))
+        self.add(layers.Dense(params["num_classes"], activation=params["activation_so"]))
         self.summary()
-        self.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
+        self.compile(optimizer=params["optimizer"], loss=params["loss"], metrics=params["metric"])
 
-params={"target_shape":(48, 48, 3),"num_classes":10}
+params={"target_shape":(48, 48, 3),
+        "activation_so":'softmax',
+        "activation_re":'relu',
+        "optimizer":'rmsprop',
+        "loss":'categorical_crossentropy',
+        "metric":'accuracy',
+        "num_classes":10}
 model=CNN(params)
 history = model.fit(xtrain, train_labels, validation_split=0.1,epochs=10)
 ########Model evaluation & diagnostics##########
