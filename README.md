@@ -16,7 +16,7 @@ The NN model is depicted above, as we see it is simple as it could be with one d
 
 From the figure showing the confusion matrix, we can make a conclusion that how the model did on classification task where there are 10 categories of numbers when the images of handwritten numbers were used to train the model. 
 
-![simple_nn_accuracy_loss](https://github.com/gbulbul/simple-ANN-application-on-MNIST/assets/79763247/4acbab1e-abe8-4b96-8ae0-10621082746d)
+![simple_nn_loss](https://github.com/gbulbul/Recognizing-handwritten-numbers-by-a-simple-neural-net-and-CNN/assets/79763247/62510d7e-f1b5-44ed-a635-aa545929271e)
 
 The loss and accuracy plots suggest that the model on MNIST dataset is suitable in a way that good accuracy score is achieved by the model. From the plot, we may suspect that there could be more epoches to be trained on because accuracy-loss plots don't look stable as we expected to see.
 
@@ -27,7 +27,7 @@ Since CNNs are known for being successful at image detection, classification, a 
 
 CNN model that we applied on MNIST is shown above. 
 
-Loss-accuracy plots are presented here to observe how the CNN model performed on MNIST. Everything looks alright in the sense of as epoch increases, the loss decreases while the accuracy increases. Validation loss is a little greater than that of training as we expected. In terms of accuracy, at epoch 10, validation accuracy gets closer to the training accuracy.
+Loss-accuracy plots are presented here to observe how the CNN model performed on MNIST. Everything looks alright in the sense of as epoch increases, the loss decreases while the accuracy increases. Validation loss is a little greater than that of training as we expected. In terms of accuracy, starting at epoch 6, validation accuracy gets closer to the training accuracy. Then, they seem equal in the final.
 
 
 ![cnn_on_mnist_updated](https://github.com/gbulbul/Recognizing-handwritten-numbers-by-a-simple-neural-net-and-CNN/assets/79763247/c584ad60-131f-4970-9133-340ac858bcd6)
