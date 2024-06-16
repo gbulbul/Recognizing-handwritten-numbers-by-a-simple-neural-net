@@ -25,7 +25,7 @@ Since CNNs are known for being successful at image detection, classification, a 
 
 ![_CNN_on_MNIST](https://github.com/gbulbul/Recognizing-handwritten-numbers-by-a-simple-neural-net-and-CNN/assets/79763247/bc01be09-cecd-455b-821c-079d7d8a63e7)
 
-CNN model that we applied on MNIST is shown above. 
+CNN model that we applied on MNIST is shown above. If we talk elaborately on this model, it starts with 2D convolutional layer which uses 2D (3*3) arrays 32 times. Then, pooling methods was applied to pick the maximum of any 2D (2*2) array. This is followed by the flat layer. Later, a dense layer comes with its 100 nodes and all of its nodes were connected to the final(outcome) layer which has 10 nodes, each is for a prespecified class (from 0 to 9).
 
 Loss-accuracy plots are presented here to observe how the CNN model performed on MNIST. Everything looks alright in the sense of as epoch increases, the loss decreases while the accuracy increases. Validation loss is a little greater than that of training as we expected. In terms of accuracy, starting at epoch 6, validation accuracy gets closer to the training accuracy. Then, they seem equal in the final.
 
