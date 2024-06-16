@@ -27,10 +27,18 @@ Since CNNs are known for being successful at image detection, classification, a 
 
 CNN model that we applied on MNIST is shown above. 
 
-CM on CNN model is provided below. As the entries on off-diagonal increases, the greater the misclassification error we get. On the contrary, in our case, CNN on MNIST did a good job of detecting classes correctly most of the time as we see from the CM plot.
+Loss-accuracy plots are presented here to observe how the CNN model performed on MNIST. Everything looks alright in the sense of as epoch increases, the loss decreases while the accuracy increases. Validation loss is a little greater than that of training as we expected. In terms of accuracy, at epoch 10, validation accuracy gets closer to the training accuracy.
+
 
 ![cnn_on_mnist_updated](https://github.com/gbulbul/Recognizing-handwritten-numbers-by-a-simple-neural-net-and-CNN/assets/79763247/c584ad60-131f-4970-9133-340ac858bcd6)
 
 Loss-accuracy plots are presented here to observe how the CNN model performed on MNIST. Everything looks alright in the sense of as epoch increases, the loss decreases while the accuracy increases. Validation loss is a little greater than that of training as we expected. In terms of accuracy, at epoch 10, validation accuracy gets closer to the training accuracy.
+
 ![cnn_on_mnist_cm](https://github.com/gbulbul/Recognizing-handwritten-numbers-by-a-simple-neural-net-and-CNN/assets/79763247/865452c4-ac69-4a62-adfd-104191cc2b88)
 
+
+CM on CNN model is provided below. As the entries on off-diagonal increases, the greater the misclassification error we get. On the contrary, in our case, CNN on MNIST did a good job of detecting classes correctly most of the time as we see from the CM plot.
+
+Final notes: CNN did a good job on working with images as we expected, but also (simple, not deep) NN did a good job as well in terms of misclassification error. Both ended up with good accuracy scores and confusion matrices are the ones with a little misclassification error. The only thing we can suggest for NN application, it may need extra epoches to be trained on because its accuracy-loss plots weren't stabilized as we expected. 
+
+So, both can be used to detect classes of images on MNIST.
