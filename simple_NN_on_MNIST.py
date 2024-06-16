@@ -83,7 +83,7 @@ x_val = train_images[-10000:]
 y_val = train_labels[-10000:]
 x_train = train_images[:-10000]
 y_train = train_labels[:-10000]
-history=network.fit(x_train,y_train,callbacks=callbacks_list,validation_data=(x_val, y_val),epochs=10)
+history=network.fit(x_train,y_train,callbacks=callbacks_list,validation_data=(x_val, y_val),epochs=12)
 test_loss, test_acc = network.evaluate(test_images, test_labels)
 ####Model evaluation & diagnosis #####
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
