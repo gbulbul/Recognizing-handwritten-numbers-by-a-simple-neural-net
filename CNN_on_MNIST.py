@@ -46,12 +46,28 @@ params={"target_shape":(img_rows, img_cols,num_channel),
         "metric":'accuracy',
         "num_classes":10}
 model=CNN(params)
-history = model.fit(xtrain, train_labels, validation_split=0.1,epochs=10)
+callbacks_list = [
+keras.callbacks.EarlyStopping(
+monitor=params["metric"],
+patience=1,
+),
+keras.callbacks.ModelCheckpoint(
+filepath='my_model.h5',
+monitor='val_loss',
+save_best_only=True,
+)
+]
+x_val = train_images[-10000:]
+y_val = train_labels[-10000:]
+x_train = train_images[:-10000]
+y_train = train_labels[:-10000]
+
+history=model.fit(x_train, y_train, epochs=12,validation_data=(x_val, y_val),callbacks=callbacks_list)
 ########Model evaluation & diagnostics##########
-test_loss, test_acc = model.evaluate(xtest, test_labels)
+test_loss, test_acc = model.evaluate(test_images, test_labels)
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from mlxtend.plotting import plot_confusion_matrix
-predictions = model.predict(xtest)
+predictions = model.predict(test_images)
 cm = confusion_matrix(test_labels.argmax(axis=1), predictions.argmax(axis=1))
 cm
 
