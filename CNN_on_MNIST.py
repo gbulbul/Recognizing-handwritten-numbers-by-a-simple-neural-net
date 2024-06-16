@@ -9,49 +9,39 @@ from tensorflow import keras
 from tensorflow.keras.models import Sequential
 import tensorflow.keras.layers 
 from keras import layers
+from tensorflow.keras.optimizers import SGD
 import matplotlib.pyplot as plt
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.datasets import mnist
 ####Loading the dataset#####
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 #####Preprocessing##########
-train_images = train_images.reshape((60000, 28 * 28)).astype('float32') / 255
-test_images = test_images.reshape((10000, 28 * 28)).astype('float32') / 255
+###PART I(arranging images)#########
+img_rows, img_cols=28, 28
+num_channel=1
+train_images = train_images.reshape(train_images.shape[0], img_rows, img_cols,num_channel).astype('float32') / 255
+test_images = test_images.reshape(test_images.shape[0], img_rows, img_cols,num_channel).astype('float32') / 255
+###PART II(arranging labels)#########
 from tensorflow.keras.utils import to_categorical
 train_labels = to_categorical(train_labels)
 test_labels = to_categorical(test_labels)
-#############################################################################################
-####Adapting to CNN format######(additional part, not found in simple NN modeling)##############
-#############################################################################################
-import numpy as np
-xtrain=np.dstack([train_images] * 3)
-xtest=np.dstack([test_images]*3)
-xtrain.shape,xtest.shape
-xtrain = xtrain.reshape(-1, 28,28,3)
-xtest= xtest.reshape (-1,28,28,3)
-xtrain.shape,xtest.shape
-from keras.preprocessing.image import img_to_array, array_to_img
-xtrain = np.asarray([img_to_array(array_to_img(im, scale=False).resize((48,48))) for im in xtrain])
-xtest = np.asarray([img_to_array(array_to_img(im, scale=False).resize((48,48))) for im in xtest])
 ###########CNN Modeling#################
 class CNN(Sequential):
     def __init__(self,params):
         super().__init__()
-        self.add(layers.Conv2D(32, (3, 3), activation=params["activation_re"], input_shape=params["target_shape"]))
-        self.add(layers.MaxPooling2D((2, 2)))
-        self.add(layers.Conv2D(64, (3, 3), activation=params["activation_re"]))
-        self.add(layers.MaxPooling2D((2, 2)))
-        self.add(layers.Conv2D(64, (3, 3), activation=params["activation_re"]))
-        self.add(layers.Flatten())
-        self.add(layers.Dense(64, activation=params["activation_re"]))
-        self.add(layers.Dense(params["num_classes"], activation=params["activation_so"]))
+        ###########
+        self.add(Conv2D(32, (3, 3), activation=params["activation_re"], kernel_initializer=params["initializer"], input_shape=params["target_shape"]))
+        self.add(MaxPooling2D((2, 2)))
+        self.add(Flatten())
+        self.add(Dense(100, activation=params["activation_re"], kernel_initializer=params["initializer"]))
+        self.add(Dense(params["num_classes"], activation=params["activation_so"]))
         self.summary()
         self.compile(optimizer=params["optimizer"], loss=params["loss"], metrics=params["metric"])
-
-params={"target_shape":(48, 48, 3),
+params={"target_shape":(img_rows, img_cols,num_channel),
         "activation_so":'softmax',
         "activation_re":'relu',
-        "optimizer":'rmsprop',
+        "initializer":'he_uniform',
+        "optimizer":SGD(learning_rate=0.01, momentum=0.9),
         "loss":'categorical_crossentropy',
         "metric":'accuracy',
         "num_classes":10}
