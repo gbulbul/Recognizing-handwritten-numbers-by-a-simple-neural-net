@@ -27,6 +27,16 @@ Since CNNs are known for being successful at image detection, classification, a 
 
 CNN model that we applied on MNIST is shown above. If we talk elaborately on this model, it starts with 2D convolutional layer which uses 2D (3*3) arrays 32 times. Then, pooling methods was applied to pick the maximum of any 2D (2*2) array. This is followed by the flat layer. Later, a dense layer comes with its 100 nodes and all of its nodes were connected to the final(outcome) layer which has 10 nodes, each is for a prespecified class (from 0 to 9).
 
+Technical details on modelling/fitting/compiling process:
+-He uniform was used to initialize kernels at 2D convolutional and dense layers, independently.
+
+-SGD was used as an optimization method with learning rate=0.01 and momentum=0.9.
+
+-Same early stopping mechanism was used for both models to stop the fitting process in case there is no substantial increase in accuracy.
+
+-Shape of Input for NN model: (28*28,)   &   Shape of Input for CNN model: (28,28,1) where (height,width,num_channel)=(28,28,1)
+
+
 Loss-accuracy plots are presented here to observe how the CNN model performed on MNIST. Everything looks alright in the sense of as epoch increases, the loss decreases while the accuracy increases. Validation loss is a little greater than that of training as we expected. In terms of accuracy, starting at epoch 6, validation accuracy gets closer to the training accuracy. Then, they seem equal in the final.
 
 
